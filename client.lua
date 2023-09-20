@@ -1,573 +1,647 @@
 {
     "dashboard": {
-        "title": "Willkommen zurück, {{name}}",
+        "title": "Welcome back, {{name}}",
         "subtitle": "{{grade}} | {{label}}",
-        "alerts": "Meldungen",
-        "citizens": "Bürger",
-        "vehicles": "Zugelassene Fahrzeuge",
-        "warrants": "Aktive Haftbefehle",
-        "officers": "Polizisten in Dienst"
+        "alerts": "Alerts",
+        "citizens": "Citizens",
+        "vehicles": "Registered Vehicles",
+        "warrants": "Active Warrants",
+        "officers": "Online Officers"
     },
     "alerts": {
-        "title": "Meldungen",
-        "subtitle": "Echtzeit-Polizeiwarnungen anzeigen",
-        "form": "Senden Sie eine Meldung",
-        "button": "Warnmeldung senden",
-        "name": "Titel der Warnung",
-        "description": "Beschreibung",
+        "title": "Alerts",
+        "subtitle": "View real-time police alerts",
+        "form": "Send an alert",
+        "button": "Send alert",
+        "name": "Alert title",
+        "description": "Description",
+        "map_settings": "Map settings",
         "notification": {
             "take": {
-                "title": "Warnmeldung",
-                "message": "Möchten Sie diesen Alarm annehmen?"
+                "title": "Alert",
+                "message": "Do you want to take this alert?"
             },
             "sent": {
-                "title": "Warnmeldung gesendet",
-                "message": "Sie haben den Alarm an die anderen Polizisten geschickt!"
+                "title": "Alert sent",
+                "message": "You sent the alert to the other cops!"
             },
             "opened": {
-                "title": "Neue Meldung",
-                "message": "Sie haben eine neue Meldung! Gehen Sie auf die Registerkarte Warnmeldung, um sie zu sehen."
+                "title": "New Alert",
+                "message": "You have a new alert! Go to the alerts tab to view it."
             },
             "closed": {
-                "title": "Neue Meldung",
-                "message": "Sie haben eine neue Meldung! Öffnen Sie die MDT und gehen Sie auf die Registerkarte Warnmeldung, um sie anzuzeigen."
+                "title": "New Alert",
+                "message": "You have a new alert! Open the MDT and go to the alerts tab to view it."
             }
         }
     },
     "incidents": {
-        "title": "Vorfälle",
-        "subtitle": "Suche nach Vorfällen",
-        "form": "Suche nach Vorfällen",
-        "create": "Einen Vorfall erstellen",
-        "button": "Ereignis erstellen",
+        "title": "Incidents",
+        "subtitle": "Search for incidents",
+        "form": "Search incidents",
+        "create": "Create an incident",
+        "button": "Create incident",
         "name": "Name",
-        "description": "Beschreibung",
-        "players": "Betroffene Bürger",
-        "cops": "Beteiligte Polizisten",
-        "vehicles": "Beteiligte Fahrzeuge",
-        "evidences": "Beweismittel",
-        "fines": "Geldstrafen",
-        "fine_reduction": "Strafenreduzierung ({{amount}}$)",
-        "fine_full": "Geldstrafen ({{amount}}$) {{reduction}}",
-        "jail": "Anklagepunkte",
-        "jail_reduction": "Reduzierung der Haftzeit ({{amount}} Monate)",
-        "jail_full": "Anklagepunkte ({{amount}} Monate) {{reduction}}",
-        "reducted": "reduziert",
+        "description": "Description",
+        "players": "Citizens involved",
+        "cops": "Cops involved",
+        "vehicles": "Vehicles involved",
+        "evidences": "Evidences",
+        "fines": "Fines",
+        "fine_reduction": "Fine reduction ({{amount}}$)",
+        "fine_full": "Fines ({{amount}}$) {{reduction}}",
+        "jail": "Charges",
+        "jail_reduction": "Jail reduction ({{amount}} months)",
+        "jail_full": "Charges ({{amount}} months) {{reduction}}",
+        "reducted": "reducted",
         "incident": {
-            "title": "Vorfall #{{id}}",
-            "subtitle": "Dieser Vorfall wurde am {{date}} erstellt"
+            "title": "Incident #{{id}}",
+            "subtitle": "This incident was created {{date}}"
         },
         "tooltip": {
-            "description": "Sie können die Beschreibung bearbeiten"
+            "description": "You can edit the description"
         },
         "modal": {
             "delete": {
-                "title": "Löschen",
-                "message": "Möchten Sie diesen Vorfall löschen?"
+                "title": "Delete",
+                "message": "Do you want to delete this incident?"
             }
         },
         "notification": {
             "error": {
-                "title": "Fehler",
-                "message": "Beim Erstellen des Vorfalls ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+                "title": "Error",
+                "message": "Something went wrong in creating the incident, try again!"
             },
             "update": {
-                "title": "Vorfall aktualisiert",
-                "message": "Sie haben die Beschreibung des Vorfalls #{{id} erfolgreich geändert}"
+                "title": "Incident updated",
+                "message": "You have successfully changed the description of incident #{{id}}"
             },
             "delete": {
-                "title": "Vorfall gelöscht",
-                "message": "Sie haben den Vorfall mit der #{{id} erfolgreich gelöscht}"
+                "title": "Incident deleted",
+                "message": "You have successfully deleted the incident #{{id}}"
             },
             "success": {
-                "title": "Vorfall erstellt",
-                "message": "Vorfall #{{id}} wurde erstellt"
+                "title": "Incident created",
+                "message": "Incident #{{id}} has been created"
             }
         }
     },
     "evidences": {
-        "title": "Beweismittel",
-        "subtitle": "Suche nach Beweisen",
-        "form": "Beweismittel suchen",
-        "create": "Erstellen Sie einen Nachweis",
-        "button": "Beweismaterial erstellen",
+        "title": "Evidences",
+        "subtitle": "Search for evidences",
+        "form": "Search evidences",
+        "create": "Create an evidence",
+        "button": "Create evidence",
         "name": "Name",
-        "description": "Beschreibung",
-        "players": "Betroffene Bürger",
-        "images": "Bilder",
+        "description": "Description",
+        "players": "Citizens involved",
+        "images": "Images",
         "evidence": {
-            "title": "Beweisemittel #{{id}}",
-            "subtitle": "Dieser Beweis wurde am {{date}} erstellt"
+            "title": "Evidence #{{id}}",
+            "subtitle": "This evidence was created {{date}}"
         },
         "modal": {
             "delete": {
-                "title": "Löschen",
-                "message": "Möchten Sie diesen Beweis löschen?"
+                "title": "Delete",
+                "message": "Do you want to delete this evidence?"
             }
         },
         "notification": {
             "error": {
-                "title": "Fehler",
-                "message": "Bei der Erstellung des Beweises ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+                "title": "Error",
+                "message": "Something went wrong in creating the evidence, try again!"
             },
             "update": {
-                "title": "Beweise aktualisiert",
-                "message": "Sie haben den Beweis mit der ID {{id}} erfolgreich geändert"
+                "title": "Evidence updated",
+                "message": "You have successfully changed the evidence with id {{id}}"
             },
             "delete": {
-                "title": "Beweise gelöscht",
-                "message": "Sie haben den Beweis mit der #{{id}} erfolgreich gelöscht"
+                "title": "Evidence deleted",
+                "message": "You have successfully deleted the evidence #{{id}}"
             },
             "success": {
-                "title": "Beweise erstellt",
-                "message": "Beweismittel #{{id}} wurde erstellt"
+                "title": "Evidence created",
+                "message": "Evidence #{{id}} has been created"
             }
         }
     },
     "citizens": {
-        "title": "Bürger",
-        "subtitle": "Suche nach Bürgern",
-        "form": "Bürger suchen",
-        "wanted": "GESUCHT",
-        "incidents": "Vorfälle",
-        "evidences": "Beweise",
-        "warrants": "Haftbefehle",
-        "vehicles": "Fahrzeuge",
-        "properties": "Eigenschaften",
-        "licenses": "Lizenzen",
-        "licenses_list": {
-            "dmv": "Theorieprüfung",
-            "drive": "Führerschein",
-            "drive_bike": "Motorradführerschein",
-            "drive_truck": "Lastkraftwagenführerschein",
-            "weed_processing": "Lizenz zur Marihuanaverarbeitung"
-        },
+        "title": "Citizens",
+        "subtitle": "Search for citizens",
+        "form": "Search citizens",
+        "wanted": "WANTED",
+        "incidents": "Incidents",
+        "evidences": "Evidences",
+        "warrants": "Warrants",
+        "vehicles": "Vehicles",
+        "properties": "Properties",
+        "bolos": "Bolos",
+        "licenses": "Licenses",
         "citizen": {
-            "title": "Bürger",
-            "subtitle": "Alle Informationen über diesen Bürger anzeigen"
+            "title": "Citizen",
+            "subtitle": "View all information about this citizen"
         },
         "modal": {
             "license_remove": {
-                "title": "Lizenz entfernen",
-                "message": "Möchten Sie diese Lizenz entfernen?"
+                "title": "Remove license",
+                "message": "Do you want to suspend this license?"
             }
         },
         "notification": {
             "update": {
-                "title": "Bürgerinformationen aktualisiert",
-                "message": "Sie haben die Bürgerinformationen erfolgreich geändert"
+                "title": "Citizen information updated",
+                "message": "You have successfully changed the citizen information"
             },
             "take": {
-                "title": "Lizenz entfernt",
-                "message": "Sie haben die Lizenz dieses Bürgers entfernt"
+                "title": "License suspended",
+                "message": "You have suspended the license of this citizen"
             }
         }
     },
     "charges": {
-        "title": "Anklagepunkte",
-        "subtitle": "Anklagepunkte suchen oder erstellen",
-        "form": "Suche Anklagepunkte",
-        "create": "Erstelle einen Anklagepunkte",
-        "button": "Erstelle Anklagepunkt",
+        "title": "Charges",
+        "subtitle": "Search or create charges",
+        "form": "Search charges",
+        "create": "Create a charge",
+        "button": "Create charge",
         "name": "Name",
-        "time": "Zeit ({{time}} Monate)",
+        "time": "Time ({{time}} months)",
         "charge": {
-            "title": "Anklagepunkt #{{id}}",
-            "subtitle": "Dieser Anklagepunkt wurde am {{date}} erstellt"
+            "title": "Charge #{{id}}",
+            "subtitle": "This charge was created {{date}}"
         },
         "modal": {
             "delete": {
-                "title": "Löschen",
-                "message": "Möchten Sie diese Gebühr löschen?"
+                "title": "Delete",
+                "message": "Do you want to delete this charge?"
             }
         },
         "notification": {
             "error": {
-                "title": "Fehler",
-                "message": "Bei der Erstellung der Ladung ist etwas schief gelaufen, versuchen Sie es erneut!"
+                "title": "Error",
+                "message": "Something went wrong in creating the charge, try again!"
             },
             "update": {
-                "title": "Anklagepunkt aktualisiert",
-                "message": "Sie haben die Gebühr mit der ID {{id}} erfolgreich geändert."
+                "title": "Charge updated",
+                "message": "You have successfully changed the charge with id {{id}}"
             },
             "delete": {
-                "title": "Anklagepunkt gelöscht",
-                "message": "Sie haben den Anklagepunkt #{{id}} erfolgreich gelöscht"
+                "title": "Charge deleted",
+                "message": "You have successfully deleted the charge #{{id}}"
             },
             "success": {
-                "title": "Anklagepunkt erstellt",
-                "message": "Anklagepunkt #{{id}} wurde erstellt"
+                "title": "Charge created",
+                "message": "Charge #{{id}} has been created"
             }
         }
     },
     "codes": {
         "title": "Codes",
-        "subtitle": "Codes suchen oder erstellen",
-        "form": "Suche nach Codes",
-        "create": "Einen Code erstellen",
-        "button": "Code erstellen",
+        "subtitle": "Search or create codes",
+        "form": "Search codes",
+        "create": "Create a code",
+        "button": "Create code",
         "name": "Name",
         "format": "Code ({{format}})",
         "code": {
             "title": "Code ({{code}})",
-            "subtitle": "Dieser Code wurde erstellt am {{date}}"
+            "subtitle": "This code was created {{date}}"
         },
         "modal": {
             "delete": {
-                "title": "Löschen",
-                "message": "Möchten Sie diesen Code löschen?"
+                "title": "Delete",
+                "message": "Do you want to delete this code?"
             }
         },
         "notification": {
             "error": {
-                "title": "Fehler",
-                "message": "Bei der Erstellung des Codes ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+                "title": "Error",
+                "message": "Something went wrong in creating the code, try again!"
             },
             "update": {
-                "title": "Code aktualisiert",
-                "message": "Sie haben den Code mit der id {{id}} erfolgreich geändert"
+                "title": "Code updated",
+                "message": "You have successfully changed the code with id {{id}}"
             },
             "delete": {
-                "title": "Code gelöscht",
-                "message": "Sie haben den Code #{{id}} erfolgreich gelöscht"
+                "title": "Code deleted",
+                "message": "You have successfully deleted the code #{{id}}"
             },
             "success": {
-                "title": "Code erstellt",
-                "message": "Code #{{id}} wurde erstellt"
+                "title": "Code created",
+                "message": "Code #{{id}} has been created"
             }
         }
     },
     "fines": {
-        "title": "Geldstrafen",
-        "subtitle": "Bußgelder suchen oder erstellen",
-        "form": "Suche nach Geldbußen",
-        "create": "Erstellen Sie eine Strafe",
-        "button": "Bußgeld erstellen",
+        "title": "Fines",
+        "subtitle": "Search or create fines",
+        "form": "Search fines",
+        "create": "Create a fine",
+        "button": "Create fine",
         "name": "Name",
         "code": "Code ({{format}})",
-        "amount": "Betrag",
+        "amount": "Amount",
         "fine": {
-            "title": "Geldstrafe #{{id}}",
-            "subtitle": "Dieser Bußgeldbescheid wurde am {{date}} erstellt."
+            "title": "Fine #{{id}}",
+            "subtitle": "This fine was created {{date}}"
         },
         "modal": {
             "delete": {
-                "title": "Löschen",
-                "message": "Möchten Sie dieses Bußgeld löschen?"
+                "title": "Delete",
+                "message": "Do you want to delete this fine?"
             }
         },
         "notification": {
             "error": {
-                "title": "Fehler",
-                "message": "Bei der Erstellung der Geldstrafe ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+                "title": "Error",
+                "message": "Something went wrong in creating the fine, try again!"
             },
             "update": {
-                "title": "Geldstrafe aktualisiert",
-                "message": "Sie haben die Geldstrafe mit der ID {{id}} erfolgreich geändert."
+                "title": "Fine updated",
+                "message": "You have successfully changed the fine with id {{id}}"
             },
             "delete": {
-                "title": "Geldstrafe gelöscht",
-                "message": "Sie haben die Geldstrafe #{{id}} erfolgreich gelöscht"
+                "title": "Fine deleted",
+                "message": "You have successfully deleted the fine #{{id}}"
             },
             "success": {
-                "title": "Geldstrafe erstellt",
-                "message": "Geldstrafe #{{id}} wurde erstellt"
+                "title": "Fine created",
+                "message": "Fine #{{id}} has been created"
             }
         }
     },
     "houses": {
-        "title": "Häuser",
-        "subtitle": "Suche nach Häusern anhand der ID oder Adresse",
-        "form": "Immobilien suchen",
-        "owned": "Im Besitz",
+        "title": "Houses",
+        "subtitle": "Search for houses by id or address",
+        "form": "Search properties",
+        "owned": "Owned",
         "house": {
-            "title": "Haus #{{id}}",
-            "subtitle": "Diese Immobilie befindet sich bei der {{address}}",
-            "placeholder": "Alle Informationen zu dieser Immobilie anzeigen"
+            "title": "House #{{id}}",
+            "subtitle": "This property is located on {{address}}",
+            "placeholder": "View all information about this property"
         },
         "notification": {
             "location": {
-                "title": "Wegpunkt setzen",
-                "message": "Ein Wegpunkt wurde auf diese Immobilie gesetzt"
+                "title": "Waypoint Set",
+                "message": "A waypoint has been set to this property"
             }
         }
     },
     "vehicles": {
-        "title": "Fahrzeuge",
-        "subtitle": "Suche nach Fahrzeugen anhand des Kennzeichens",
-        "form": "Fahrzeuge suchen",
-        "owned": "Im Besitz",
-        "plate": "Kennzeichen",
-        "incidents": "Vorfälle",
+        "title": "Vehicles",
+        "subtitle": "Search for vehicles by registration number",
+        "form": "Search vehicles",
+        "owned": "Owned",
+        "plate": "Plate",
+        "incidents": "Incidents",
+        "bolos": "Bolos",
+        "wanted": "WANTED",
         "vehicle": {
-            "title": "Fahrzeug",
-            "subtitle": "Alle Informationen zu diesem Fahrzeug anzeigen"
+            "title": "Vehicle",
+            "subtitle": "View all information about this vehicle"
         },
         "notification": {
             "update": {
-                "title": "Fahrzeuginformationen aktualisiert",
-                "message": "Sie haben die Fahrzeuginformationen erfolgreich geändert"
+                "title": "Vehicle information updated",
+                "message": "You have successfully changed the vehicle information"
             }
         }
     },
     "warrants": {
-        "title": "Haftbefehle",
-        "subtitle": "Suche nach Haftbefehlen nach Bürger oder Adresse",
-        "form": "Suche Haftbefehle",
-        "create": "Erstelle einen Haftbefehl",
-        "button": "Erstelle Haftbefehl",
-        "reason": "Grund",
-        "description": "Beschreibung",
-        "type": "Art des Haftbefehls",
-        "players": "Beteiligte Bürger",
-        "house": "Häuser",
-        "done": "Erledigt",
-        "screenshot": "Machen Sie einen Screenshot",
+        "title": "Warrants",
+        "subtitle": "Search for warrants by citizen or address",
+        "form": "Search warrants",
+        "create": "Create a warrant",
+        "button": "Create warrant",
+        "reason": "Reason",
+        "description": "Description",
+        "type": "Warrant type",
+        "players": "Citizens involved",
+        "house": "Houses",
+        "done": "Done",
+        "screenshot": "Take a screenshot",
         "tabs": {
             "link": "Link",
             "screenshot": "Screenshot"
         },
         "types": {
-            "arrest": "Festnahme",
-            "search": "Suche"
+            "arrest": "Arrest",
+            "search": "Search"
         },
         "warrant": {
-            "title": "Haftbefehle #{{id}}",
-            "subtitle": "Dieser Haftbefehl wurde am {{date}} erstellt"
+            "title": "Warrant #{{id}}",
+            "subtitle": "This warrant was created {{date}}"
         },
         "modal": {
             "delete": {
-                "title": "Löschen",
-                "message": "Möchten Sie diesen Haftbefehl löschen?"
+                "title": "Delete",
+                "message": "Do you want to delete this warrant?"
             }
         },
         "notification": {
             "error": {
-                "title": "Fehler",
-                "message": "Bei der Erstellung des Haftbefehls ist etwas schief gelaufen, versuchen Sie es erneut!"
+                "title": "Error",
+                "message": "Something went wrong in creating the warrant, try again!"
             },
             "update": {
-                "title": "Haftbefehl aktualisiert",
-                "message": "Sie haben den Haftbefehl mit der ID {{id}} erfolgreich geändert."
+                "title": "Warrant updated",
+                "message": "You have successfully changed the warrant with id {{id}}"
             },
             "delete": {
-                "title": "Haftbefehl gelöscht",
-                "message": "Sie haben den Haftbefehl #{{id}} erfolgreich gelöscht"
+                "title": "Warrant deleted",
+                "message": "You have successfully deleted the warrant #{{id}}"
             },
             "success": {
-                "title": "Haftbefehl erstellt",
-                "message": "Haftbefehl #{{id}} wurde erstellt"
+                "title": "Warrant created",
+                "message": "Warrant #{{id}} has been created"
             }
         }
     },
     "officers": {
-        "title": "Beamte",
-        "subtitle": "Alle Beamten anzeigen"
+        "title": "Officers",
+        "subtitle": "View all officers"
     },
-    "announcements": {
-        "title": "Ankündigungen",
-        "subtitle": "Alle Ankündigungen anzeigen, die von den Chefs gemacht wurden",
-        "list": "Liste",
-        "form": "Formular",
-        "search": "Ankündigungen durchsuchen",
-        "pinned": "Diese Ankündigung ist angeheftet",
-        "created": "Ankündigung erstellt",
-        "create": "Ankündigung erstellen",
-        "name": "Titel",
-        "button": "Ankündigung erstellen",
+    "bolos": {
+        "title": "Bolos",
+        "subtitle": "Search for bolos by name, car plate or title",
+        "form": "Search bolos",
+        "create": "Create a bolo",
+        "button": "Create bolo",
+        "name": "Title",
+        "description": "Description",
+        "type": "Bolo type",
+        "players": "Citizens",
+        "vehicles": "Vehicles",
+        "ended": "Ended",
+        "types": {
+            "people": "People (Name)",
+            "vehicles": "Vehicles (Plate)"
+        },
+        "bolo": {
+            "title": "BOLO #{{id}}",
+            "subtitle": "This bolo was created {{date}}"
+        },
+        "tooltip": {
+            "description": "You can edit the BOLO",
+            "end": "You can end this BOLO"
+        },
         "modal": {
             "delete": {
-                "title": "Löschen",
-                "message": "Möchten Sie diese Ankündigung löschen?"
+                "title": "Delete",
+                "message": "Do you want to delete this bolo?"
+            },
+            "end": {
+                "title": "End BOLO",
+                "message": "Do you want to end this bolo?"
             }
-        },
-        "announcement": {
-            "title": "Ankündigung #{{id}}",
-            "subtitle": "Diese Ankündigung wurde am {{date}} erstellt",
-            "edit": "Bearbeiten",
-            "save": "Änderungen speichern"
         },
         "notification": {
             "error": {
-                "title": "Fehler",
-                "message": "Bei der Erstellung der Ankündigung ist etwas schief gelaufen. Bitte versuchen Sie es erneut!"
+                "title": "Error",
+                "message": "Something went wrong in creating the bolo, try again!"
             },
             "update": {
-                "title": "Ankündigung aktualisiert",
-                "message": "Sie haben die Ankündigung mit der ID {{id}} erfolgreich geändert"
+                "title": "BOLO updated",
+                "message": "You have successfully updated the bolo #{{id}}"
             },
             "delete": {
-                "title": "Ankündigung gelöscht",
-                "message": "Sie haben die Ankündigung Nr. {{id}} erfolgreich gelöscht"
+                "title": "BOLO deleted",
+                "message": "You have successfully deleted bolo #{{id}}"
             },
             "success": {
-                "title": "Ankündigung erstellt",
-                "message": "Ankündigung Nr. {{id}} wurde erstellt"
+                "title": "BOLO created",
+                "message": "Bolo #{{id}} has been created"
+            },
+            "end": {
+                "title": "BOLO ended",
+                "message": "You have successfully ended the bolo #{{id}}"
+            }
+        }
+    },
+    "announcements": {
+        "title": "Announcements",
+        "subtitle": "View all announcements made by the chiefs",
+        "list": "List",
+        "form": "Form",
+        "search": "Search announcements",
+        "pinned": "This announcement is pinned",
+        "created": "Announcement created",
+        "create": "Create announcement",
+        "name": "Title",
+        "button": "Create announcement",
+        "modal": {
+            "delete": {
+                "title": "Delete",
+                "message": "Do you want to delete this announcement?"
+            }
+        },
+        "announcement": {
+            "title": "Announcement #{{id}}",
+            "subtitle": "This announcement was created {{date}}",
+            "edit": "Edit",
+            "save": "Save changes"
+        },
+        "notification": {
+            "error": {
+                "title": "Error",
+                "message": "Something went wrong in creating the announcement, try again!"
+            },
+            "update": {
+                "title": "Announcement updated",
+                "message": "You have successfully changed the announcement with id {{id}}"
+            },
+            "delete": {
+                "title": "Announcement deleted",
+                "message": "You have successfully deleted the announcement #{{id}}"
+            },
+            "success": {
+                "title": "Announcement created",
+                "message": "Announcement #{{id}} has been created"
             }
         }
     },
     "configuration": {
-        "title": "Konfiguration",
-        "subtitle": "Passen Sie die MDT nach Ihren Wünschen an",
-        "colors": "Farben",
-        "main_color": "Hauptfarbe",
-        "secondary_color": "Sekundärfarbe",
-        "third_color": "Tertiärfarbe",
-        "highlight_color": "Hervorhebungsfarbe",
-        "contrast_color": "Kontrastfarbe",
-        "text_color": "Textfarbe",
-        "language": "Sprache",
-        "reset": "Einstellungen zurücksetzen",
-        "placeholder": "🌎 Sprache",
+        "title": "Configuration",
+        "subtitle": "Customize the MDT to your liking",
+        "colors": "Colors",
+        "main_color": "Main color",
+        "secondary_color": "Secondary color",
+        "third_color": "Third color",
+        "highlight_color": "Highlight color",
+        "contrast_color": "Contrast color",
+        "text_color": "Text color",
+        "language": "Language",
+        "reset": "Reset settings",
+        "placeholder": "🌎 Language",
         "tooltip": {
-            "language": "Mit dieser Option wird die Sprache nicht für alle Benutzer geändert!"
+            "language": "This option will not change the language for all users!"
         }
     },
     "chat": {
-        "placeholder": "Geben Sie eine Nachricht ein..."
+        "placeholder": "Type a message.."
     },
     "errors": {
-        "no-permission": "Sie haben keine Berechtigung, diese Aktion auszuführen",
+        "no-permission": "You do not have permission to do this",
         "incidents": {
             "name": {
-                "length": "Der Name muss länger als 3 Zeichen sein",
-                "required": "Sie müssen einen Namen eingeben"
+                "length": "The name must be longer than 3 characters",
+                "required": "You must provide a name"
             },
             "description": {
-                "length": "Die Beschreibung muss länger als 10 Zeichen sein",
-                "required": "Sie müssen eine Beschreibung abgeben"
+                "length": "The description must be longer than 10 characters",
+                "required": "You must provide a description"
             },
             "players": {
-                "length": "Sie müssen mindestens 1 Bürger auswählen",
-                "required": "Sie müssen einen beteiligten Bürger auswählen"
+                "length": "You must select at least 1 citizen",
+                "required": "You must select an involved citizen"
             },
             "cops": {
-                "length": "Sie müssen mindestens 1 Polizist auswählen",
-                "required": "Sie müssen einen beteiligten Polizisten auswählen"
+                "length": "You must select at least 1 cop",
+                "required": "You must select an involved cop"
             }
         },
         "evidences": {
             "name": {
-                "length": "Der Name muss länger als 3 Zeichen sein",
-                "required": "Sie müssen einen Namen eingeben"
+                "length": "The name must be longer than 3 characters",
+                "required": "You must provide a name"
             },
             "description": {
-                "length": "Die Beschreibung muss länger als 10 Zeichen sein",
-                "required": "Sie müssen eine Beschreibung angeben"
+                "length": "The description must be longer than 10 characters",
+                "required": "You must provide adescription"
             },
             "images": {
-                "length": "Sie müssen mindestens 1 Bild hinzufügen",
-                "max": "Sie können nur 9 Bilder hinzufügen"
+                "length": "You must add at least 1 image",
+                "max": "You can only add 9 images"
+            }
+        },
+        "bolos": {
+            "title": {
+                "length": "The title must be longer than 3 characters",
+                "required": "You must provide a title"
+            },
+            "description": {
+                "length": "The description must be longer than 10 characters",
+                "required": "You must provide a description"
+            },
+            "bolo_type": {
+                "required": "You must select a bolo type"
             }
         },
         "warrants": {
             "reason": {
-                "length": "Der Grund muss länger als 5 Zeichen sein",
-                "required": "Sie müssen einen Grund angeben"
+                "length": "The reason must be longer than 5 characters",
+                "required": "You must provide a reason"
             },
             "description": {
-                "length": "Die Beschreibung muss länger als 10 Zeichen sein",
-                "required": "Sie müssen eine Beschreibung liefern"
+                "length": "The description must be longer than 10 characters",
+                "required": "You must provide a description"
             },
             "wtype": {
-                "required": "Sie müssen einen Haftbefehlstyp auswählen"
+                "required": "You must select a warrant type"
             }
         },
         "alert": {
             "title": {
-                "required": "Die Ausschreibung muss einen Titel haben"
+                "required": "The alert must have a title"
             },
             "description": {
-                "required": "Sie müssen etwas in die Beschreibung der Ausschreibung schreiben"
+                "required": "You must write something in the description of the alert"
             }
         },
         "charges": {
             "name": {
-                "required": "Sie müssen einen Namen angeben"
+                "required": "You must provide a name"
             }
         },
         "codes": {
             "name": {
-                "required": "Sie müssen einen Namen angeben"
+                "required": "You must provide a name"
             },
             "code": {
-                "required": "Sie müssen einen Namen angeben",
-                "format": "Das Codeformat ist falsch"
+                "required": "You must provide a code",
+                "format": "The code format is wrong"
             }
         },
         "fines": {
             "name": {
-                "required": "Sie müssen einen Namen angeben"
+                "required": "You must provide a name"
             },
             "code": {
-                "required": "Sie müssen einen Code angeben",
-                "format": "Das Codeformat ist falsch"
+                "required": "You must provide a code",
+                "format": "The code format is wrong"
             },
             "amount": {
-                "required": "Sie müssen einen Betrag festlegen"
+                "required": "You must set an amount"
+            }
+        },
+        "announcements": {
+            "title": {
+                "required": "You must provide a title"
             }
         }
     },
     "list": {
-        "not_found": "Keine Ergebnisse gefunden"
+        "not_found": "No results found"
     },
     "modal": {
-        "confirm": "Bestätigen",
-        "close": "Schließen"
+        "confirm": "Confirm",
+        "close": "Close"
     },
     "common": {
         "tooltip": {
-            "save": "Klicken Sie auf das Speichersymbol, um die Werte zu speichern",
-            "visit": "Klicken Sie hier, um das Profil des Eigentümers zu besuchen",
-            "waypoint": "Klicken Sie hier, um einen Wegpunkt zu dieser Immobilie zu setzen",
-            "image": "Klicken Sie mit der linken Maustaste, um das Bild zu bearbeiten | Klicken Sie mit der rechten Maustaste, um das Bild zu vergrößern",
-            "clear": "Klicken Sie hier, um Werte zu löschen"
+            "save": "Click on the save icon to save the values",
+            "visit": "Click here to visit the owner's profile",
+            "waypoint": "Click here to set a waypoint to this property",
+            "image": "Left click to edit the picture | Right click to zoom the picture",
+            "clear": "Click here to clear the form"
         },
         "modal": {
-            "clear_title": "Formular löschen",
-            "clear_message": "Möchten Sie wirklich die Formularwerte löschen?"
+            "clear_title": "Clear form",
+            "clear_message": "Are you sure you want to clear the form values?",
+            "list_remove": "Remove result",
+            "list_remove_message": "Are you sure you want to remove this result?"
         }
     },
     "words": {
-        "error": "Fehler",
-        "search": "Suche",
+        "error": "Error",
+        "search": "Search",
         "name": "Name",
-        "description": "Beschreibung",
-        "amount": "Betrag",
-        "months": "Monate",
-        "street": "Straße",
-        "warrants": "Haftbefehle",
-        "information": "Informationen",
-        "firstname": "Vorname",
-        "lastname": "Nachname",
-        "gender": "Geschlecht",
-        "birth": "Datum der Geburt",
-        "phone": "Telefonnummer",
+        "description": "Description",
+        "amount": "Amount",
+        "months": "months",
+        "street": "Street",
+        "warrants": "Warrants",
+        "information": "Information",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "gender": "Gender",
+        "birth": "Date of birth",
+        "phone": "Phone number",
         "job": "Job",
-        "height": "Größe",
-        "notes": "Anmerkungen",
-        "yes": "Ja",
-        "no": "Nein",
-        "house": "Häuser",
+        "height": "Height",
+        "notes": "Notes",
+        "yes": "Yes",
+        "no": "No",
+        "house": "Houses",
         "online": "Online",
         "offline": "Offline",
-        "exit": "Beenden"
+        "exit": "Exit"
     },
     "pages": {
         "dashboard": "Dashboard",
-        "incidents": "Vorfälle",
-        "evidences": "Beweismittel",
-        "warrants": "Haftbefehle",
-        "officers": "Beamte",
-        "alerts": "Meldungen",
-        "citizens": "Bürger",
-        "vehicles": "Fahrzeuge",
-        "houses": "Häuser",
-        "fines": "Geldstrafen",
+        "incidents": "Incidents",
+        "evidences": "Evidences",
+        "warrants": "Warrants",
+        "officers": "Officers",
+        "alerts": "Alerts",
+        "citizens": "Citizens",
+        "vehicles": "Vehicles",
+        "houses": "Houses",
+        "fines": "Fines",
         "codes": "Codes",
-        "charges": "Anklagepunkte",
-        "announcements": "Ankündigungen",
-        "bolos": "Haftbefehle",
-        "config": "Konfiguration"
+        "charges": "Charges",
+        "announcements": "Announcements",
+        "bolos": "Bolos",
+        "config": "Config"
     }
 }
