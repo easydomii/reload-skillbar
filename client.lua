@@ -1,202 +1,573 @@
-local chance = 0
-local skillGap = 20
-
-function openGui(sentLength,taskID,namesent,chancesent,skillGapSent)
-    guiEnabled = true
-    SetNuiFocus(guiEnabled,false)
-    print("taskbar started")
-    SendNUIMessage({runProgress = true, Length = sentLength, Task = taskID, name = namesent, chance = chancesent, skillGap = skillGapSent})
-end
-function updateGui(sentLength,taskID,namesent,chancesent,skillGapSent)
-    SendNUIMessage({runUpdate = true, Length = sentLength, Task = taskID, name = namesent, chance = chancesent, skillGap = skillGapSent})
-end
-local activeTasks = 0
-function closeGuiFail()
-    guiEnabled = false
-    SetNuiFocus(guiEnabled,false)
-    SendNUIMessage({closeFail = true})
-end
-function closeGui()
-    guiEnabled = false
-    SetNuiFocus(guiEnabled,false)
-    SendNUIMessage({closeProgress = true})
-end
-
-function closeNormalGui()
-    guiEnabled = false
-    SetNuiFocus(guiEnabled,false)
-end
-  
-RegisterNUICallback('taskCancel', function(data, cb)
-  closeGui()
-  activeTasks = 2
-  FactorFunction(false)
-end)
-
-RegisterNUICallback('taskEnd', function(data, cb)
-    closeNormalGui()
-    if (tonumber(data.taskResult) < (chance + 20) and tonumber(data.taskResult) > (chance))  then
-        activeTasks = 3
-        --TriggerEvent("notification","Success!")
-        factor = 1.0
-    else
-        FactorFunction(false)
-        activeTasks = 2
-    end
-end)
-
-local factor = 1.0
-local taskInProcess = false
-local calm = true
-
-function FactorFunction(pos)
-    if not pos then
-        factor = factor - 0.1
-        if factor < 0.1 then
-            factor = 0.1
-        end
-        if factor == 0.5 and calm then
-            calm = false
-            TriggerEvent("notification","You are frustrated", 2)
-        end
-        TriggerEvent("factor:restore")
-    else
-        if factor > 1.0 or factor == 0.9 then
-            if not calm then
-                TriggerEvent("notification","You are calm again")
-                calm = true
-            end            
-            factor = 1.0
-            return
-        end
-        factor = factor + 0.1
-    end    
-end
-
-RegisterNetEvent('factor:restore')
-AddEventHandler('factor:restore', function()
-    Wait(15000)
-    FactorFunction(true)
-end)
-
--- difficulty around 1200 becomes hard on the 4-5th use
--- difficulty around 2500 should never really be a problem - just keeps them focused.
-
--- skillGap is the width of our current skill, 20 being easy, lower down to 5 is harder, almost impossible with higher speeds.
-
-function taskBar(difficulty,skillGapSent)
-    Wait(100)
-    skillGap = skillGapSent
-    if skillGap < 5 then
-        skillGap = 5
-    end
-    local name = "E"
-    local playerPed = PlayerPedId()
-    if taskInProcess then
-        return 100
-    end
-    FactorFunction(false)
-    chance = math.random(15,90)
-
-    local length = math.ceil(difficulty * factor)
-
-    taskInProcess = true
-    local taskIdentifier = "taskid" .. math.random(1000000)
-    openGui(length,taskIdentifier,name,chance,skillGap)
-    activeTasks = 1
-
-    local maxcount = GetGameTimer() + length
-    local curTime
-
-    while activeTasks == 1 do
-        Citizen.Wait(1)
-        curTime = GetGameTimer()
-        if curTime > maxcount then
-            activeTasks = 2
-        end
-        local updater = 100 - (((maxcount - curTime) / length) * 100)
-        updater = math.min(100, updater)
-        updateGui(updater,taskIdentifier,name,chance,skillGap)
-    end
-
-    if activeTasks == 2 then
-        closeGui()
-        taskInProcess = false
-        return 0
-    else
-        closeGui()
-        taskInProcess = false
-        return 100
-    end
-   
-end
-
-
--- One Bar Test
-
-RegisterCommand('testtaskbar', function()
-
-    --local finished = exports["reload-skillbar"]:taskBar(4000,math.random(5,15))
-    local finished = taskBar(4000,math.random(5,15))
-    if finished ~= 100 then
-        TriggerEvent('notification', 'You\'re trash at this...', 2)
-        --TriggerEvent('notification', 'Failed', 2)
-    else
-        TriggerEvent('notification', 'Finished, now here\'s a cookie! xD')
-        -- Do what you want them to do here...
-        --HotWireCar()
-    end
-end)
-
--- REMEMBER EACH ONE GETS FASTER AUTOMATICALLY TOO!
-
--- Two Bar Test
-RegisterCommand('testtaskbar2', function()
-
-    --local finished = exports["reload-skillbar"]:taskBar(4000,math.random(5,15))
-    local finished = taskBar(4000,math.random(5,15))
-    if finished ~= 100 then
-        TriggerEvent('notification', 'You\'re trash at this...', 2)
-        --TriggerEvent('notification', 'Failed', 2)
-    else
-        --local finished2 = exports["reload-skillbar"]:taskBar(6000,math.random(5,15))
-        local finished2 = taskBar(2500,math.random(5,15))
-        if finished2 ~= 100 then
-            TriggerEvent('notification', 'You\'re trash at this...', 2)
-            --TriggerEvent('notification', 'Failed', 2)
-        else
-            TriggerEvent('notification', 'Finished, now here\'s a cookie! xD')
-            -- Do what you want them to do here...
-            --HotWireCar()
-        end
-    end
-end)
-
--- Three Bar Test
-RegisterCommand('testtaskbar3', function()
-
-    --local finished = exports["reload-skillbar"]:taskBar(4000,math.random(5,15))
-    local finished = taskBar(4000,math.random(5,15))
-    if finished ~= 100 then
-        TriggerEvent('notification', 'You\'re trash at this...', 2)
-        --TriggerEvent('notification', 'Failed', 2)
-    else
-        --local finished2 = exports["reload-skillbar"]:taskBar(6000,math.random(5,15))
-        local finished2 = taskBar(3000,math.random(5,15))
-        if finished2 ~= 100 then
-            TriggerEvent('notification', 'You\'re trash at this...', 2)
-            --TriggerEvent('notification', 'Failed', 2)
-        else
-            --local finished3 = exports["reload-skillbar"]:taskBar(6000,math.random(5,15))
-            local finished3 = taskBar(2000,math.random(5,15))
-            if finished3 ~= 100 then
-                TriggerEvent('notification', 'You\'re trash at this...', 2)
-                --TriggerEvent('notification', 'Failed', 2)
-            else
-                TriggerEvent('notification', 'Finished, now here\'s a cookie! xD')
-                -- Do what you want them to do here...
-                --HotWireCar()
-            end
-        end
-    end
-end)
+{
+    "dashboard": {
+        "title": "Willkommen zurück, {{name}}",
+        "subtitle": "{{grade}} | {{label}}",
+        "alerts": "Meldungen",
+        "citizens": "Bürger",
+        "vehicles": "Zugelassene Fahrzeuge",
+        "warrants": "Aktive Haftbefehle",
+        "officers": "Polizisten in Dienst"
+    },
+    "alerts": {
+        "title": "Meldungen",
+        "subtitle": "Echtzeit-Polizeiwarnungen anzeigen",
+        "form": "Senden Sie eine Meldung",
+        "button": "Warnmeldung senden",
+        "name": "Titel der Warnung",
+        "description": "Beschreibung",
+        "notification": {
+            "take": {
+                "title": "Warnmeldung",
+                "message": "Möchten Sie diesen Alarm annehmen?"
+            },
+            "sent": {
+                "title": "Warnmeldung gesendet",
+                "message": "Sie haben den Alarm an die anderen Polizisten geschickt!"
+            },
+            "opened": {
+                "title": "Neue Meldung",
+                "message": "Sie haben eine neue Meldung! Gehen Sie auf die Registerkarte Warnmeldung, um sie zu sehen."
+            },
+            "closed": {
+                "title": "Neue Meldung",
+                "message": "Sie haben eine neue Meldung! Öffnen Sie die MDT und gehen Sie auf die Registerkarte Warnmeldung, um sie anzuzeigen."
+            }
+        }
+    },
+    "incidents": {
+        "title": "Vorfälle",
+        "subtitle": "Suche nach Vorfällen",
+        "form": "Suche nach Vorfällen",
+        "create": "Einen Vorfall erstellen",
+        "button": "Ereignis erstellen",
+        "name": "Name",
+        "description": "Beschreibung",
+        "players": "Betroffene Bürger",
+        "cops": "Beteiligte Polizisten",
+        "vehicles": "Beteiligte Fahrzeuge",
+        "evidences": "Beweismittel",
+        "fines": "Geldstrafen",
+        "fine_reduction": "Strafenreduzierung ({{amount}}$)",
+        "fine_full": "Geldstrafen ({{amount}}$) {{reduction}}",
+        "jail": "Anklagepunkte",
+        "jail_reduction": "Reduzierung der Haftzeit ({{amount}} Monate)",
+        "jail_full": "Anklagepunkte ({{amount}} Monate) {{reduction}}",
+        "reducted": "reduziert",
+        "incident": {
+            "title": "Vorfall #{{id}}",
+            "subtitle": "Dieser Vorfall wurde am {{date}} erstellt"
+        },
+        "tooltip": {
+            "description": "Sie können die Beschreibung bearbeiten"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diesen Vorfall löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Beim Erstellen des Vorfalls ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+            },
+            "update": {
+                "title": "Vorfall aktualisiert",
+                "message": "Sie haben die Beschreibung des Vorfalls #{{id} erfolgreich geändert}"
+            },
+            "delete": {
+                "title": "Vorfall gelöscht",
+                "message": "Sie haben den Vorfall mit der #{{id} erfolgreich gelöscht}"
+            },
+            "success": {
+                "title": "Vorfall erstellt",
+                "message": "Vorfall #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "evidences": {
+        "title": "Beweismittel",
+        "subtitle": "Suche nach Beweisen",
+        "form": "Beweismittel suchen",
+        "create": "Erstellen Sie einen Nachweis",
+        "button": "Beweismaterial erstellen",
+        "name": "Name",
+        "description": "Beschreibung",
+        "players": "Betroffene Bürger",
+        "images": "Bilder",
+        "evidence": {
+            "title": "Beweisemittel #{{id}}",
+            "subtitle": "Dieser Beweis wurde am {{date}} erstellt"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diesen Beweis löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung des Beweises ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+            },
+            "update": {
+                "title": "Beweise aktualisiert",
+                "message": "Sie haben den Beweis mit der ID {{id}} erfolgreich geändert"
+            },
+            "delete": {
+                "title": "Beweise gelöscht",
+                "message": "Sie haben den Beweis mit der #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Beweise erstellt",
+                "message": "Beweismittel #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "citizens": {
+        "title": "Bürger",
+        "subtitle": "Suche nach Bürgern",
+        "form": "Bürger suchen",
+        "wanted": "GESUCHT",
+        "incidents": "Vorfälle",
+        "evidences": "Beweise",
+        "warrants": "Haftbefehle",
+        "vehicles": "Fahrzeuge",
+        "properties": "Eigenschaften",
+        "licenses": "Lizenzen",
+        "licenses_list": {
+            "dmv": "Theorieprüfung",
+            "drive": "Führerschein",
+            "drive_bike": "Motorradführerschein",
+            "drive_truck": "Lastkraftwagenführerschein",
+            "weed_processing": "Lizenz zur Marihuanaverarbeitung"
+        },
+        "citizen": {
+            "title": "Bürger",
+            "subtitle": "Alle Informationen über diesen Bürger anzeigen"
+        },
+        "modal": {
+            "license_remove": {
+                "title": "Lizenz entfernen",
+                "message": "Möchten Sie diese Lizenz entfernen?"
+            }
+        },
+        "notification": {
+            "update": {
+                "title": "Bürgerinformationen aktualisiert",
+                "message": "Sie haben die Bürgerinformationen erfolgreich geändert"
+            },
+            "take": {
+                "title": "Lizenz entfernt",
+                "message": "Sie haben die Lizenz dieses Bürgers entfernt"
+            }
+        }
+    },
+    "charges": {
+        "title": "Anklagepunkte",
+        "subtitle": "Anklagepunkte suchen oder erstellen",
+        "form": "Suche Anklagepunkte",
+        "create": "Erstelle einen Anklagepunkte",
+        "button": "Erstelle Anklagepunkt",
+        "name": "Name",
+        "time": "Zeit ({{time}} Monate)",
+        "charge": {
+            "title": "Anklagepunkt #{{id}}",
+            "subtitle": "Dieser Anklagepunkt wurde am {{date}} erstellt"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diese Gebühr löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung der Ladung ist etwas schief gelaufen, versuchen Sie es erneut!"
+            },
+            "update": {
+                "title": "Anklagepunkt aktualisiert",
+                "message": "Sie haben die Gebühr mit der ID {{id}} erfolgreich geändert."
+            },
+            "delete": {
+                "title": "Anklagepunkt gelöscht",
+                "message": "Sie haben den Anklagepunkt #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Anklagepunkt erstellt",
+                "message": "Anklagepunkt #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "codes": {
+        "title": "Codes",
+        "subtitle": "Codes suchen oder erstellen",
+        "form": "Suche nach Codes",
+        "create": "Einen Code erstellen",
+        "button": "Code erstellen",
+        "name": "Name",
+        "format": "Code ({{format}})",
+        "code": {
+            "title": "Code ({{code}})",
+            "subtitle": "Dieser Code wurde erstellt am {{date}}"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diesen Code löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung des Codes ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+            },
+            "update": {
+                "title": "Code aktualisiert",
+                "message": "Sie haben den Code mit der id {{id}} erfolgreich geändert"
+            },
+            "delete": {
+                "title": "Code gelöscht",
+                "message": "Sie haben den Code #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Code erstellt",
+                "message": "Code #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "fines": {
+        "title": "Geldstrafen",
+        "subtitle": "Bußgelder suchen oder erstellen",
+        "form": "Suche nach Geldbußen",
+        "create": "Erstellen Sie eine Strafe",
+        "button": "Bußgeld erstellen",
+        "name": "Name",
+        "code": "Code ({{format}})",
+        "amount": "Betrag",
+        "fine": {
+            "title": "Geldstrafe #{{id}}",
+            "subtitle": "Dieser Bußgeldbescheid wurde am {{date}} erstellt."
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie dieses Bußgeld löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung der Geldstrafe ist etwas schief gelaufen, versuchen Sie es noch einmal!"
+            },
+            "update": {
+                "title": "Geldstrafe aktualisiert",
+                "message": "Sie haben die Geldstrafe mit der ID {{id}} erfolgreich geändert."
+            },
+            "delete": {
+                "title": "Geldstrafe gelöscht",
+                "message": "Sie haben die Geldstrafe #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Geldstrafe erstellt",
+                "message": "Geldstrafe #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "houses": {
+        "title": "Häuser",
+        "subtitle": "Suche nach Häusern anhand der ID oder Adresse",
+        "form": "Immobilien suchen",
+        "owned": "Im Besitz",
+        "house": {
+            "title": "Haus #{{id}}",
+            "subtitle": "Diese Immobilie befindet sich bei der {{address}}",
+            "placeholder": "Alle Informationen zu dieser Immobilie anzeigen"
+        },
+        "notification": {
+            "location": {
+                "title": "Wegpunkt setzen",
+                "message": "Ein Wegpunkt wurde auf diese Immobilie gesetzt"
+            }
+        }
+    },
+    "vehicles": {
+        "title": "Fahrzeuge",
+        "subtitle": "Suche nach Fahrzeugen anhand des Kennzeichens",
+        "form": "Fahrzeuge suchen",
+        "owned": "Im Besitz",
+        "plate": "Kennzeichen",
+        "incidents": "Vorfälle",
+        "vehicle": {
+            "title": "Fahrzeug",
+            "subtitle": "Alle Informationen zu diesem Fahrzeug anzeigen"
+        },
+        "notification": {
+            "update": {
+                "title": "Fahrzeuginformationen aktualisiert",
+                "message": "Sie haben die Fahrzeuginformationen erfolgreich geändert"
+            }
+        }
+    },
+    "warrants": {
+        "title": "Haftbefehle",
+        "subtitle": "Suche nach Haftbefehlen nach Bürger oder Adresse",
+        "form": "Suche Haftbefehle",
+        "create": "Erstelle einen Haftbefehl",
+        "button": "Erstelle Haftbefehl",
+        "reason": "Grund",
+        "description": "Beschreibung",
+        "type": "Art des Haftbefehls",
+        "players": "Beteiligte Bürger",
+        "house": "Häuser",
+        "done": "Erledigt",
+        "screenshot": "Machen Sie einen Screenshot",
+        "tabs": {
+            "link": "Link",
+            "screenshot": "Screenshot"
+        },
+        "types": {
+            "arrest": "Festnahme",
+            "search": "Suche"
+        },
+        "warrant": {
+            "title": "Haftbefehle #{{id}}",
+            "subtitle": "Dieser Haftbefehl wurde am {{date}} erstellt"
+        },
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diesen Haftbefehl löschen?"
+            }
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung des Haftbefehls ist etwas schief gelaufen, versuchen Sie es erneut!"
+            },
+            "update": {
+                "title": "Haftbefehl aktualisiert",
+                "message": "Sie haben den Haftbefehl mit der ID {{id}} erfolgreich geändert."
+            },
+            "delete": {
+                "title": "Haftbefehl gelöscht",
+                "message": "Sie haben den Haftbefehl #{{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Haftbefehl erstellt",
+                "message": "Haftbefehl #{{id}} wurde erstellt"
+            }
+        }
+    },
+    "officers": {
+        "title": "Beamte",
+        "subtitle": "Alle Beamten anzeigen"
+    },
+    "announcements": {
+        "title": "Ankündigungen",
+        "subtitle": "Alle Ankündigungen anzeigen, die von den Chefs gemacht wurden",
+        "list": "Liste",
+        "form": "Formular",
+        "search": "Ankündigungen durchsuchen",
+        "pinned": "Diese Ankündigung ist angeheftet",
+        "created": "Ankündigung erstellt",
+        "create": "Ankündigung erstellen",
+        "name": "Titel",
+        "button": "Ankündigung erstellen",
+        "modal": {
+            "delete": {
+                "title": "Löschen",
+                "message": "Möchten Sie diese Ankündigung löschen?"
+            }
+        },
+        "announcement": {
+            "title": "Ankündigung #{{id}}",
+            "subtitle": "Diese Ankündigung wurde am {{date}} erstellt",
+            "edit": "Bearbeiten",
+            "save": "Änderungen speichern"
+        },
+        "notification": {
+            "error": {
+                "title": "Fehler",
+                "message": "Bei der Erstellung der Ankündigung ist etwas schief gelaufen. Bitte versuchen Sie es erneut!"
+            },
+            "update": {
+                "title": "Ankündigung aktualisiert",
+                "message": "Sie haben die Ankündigung mit der ID {{id}} erfolgreich geändert"
+            },
+            "delete": {
+                "title": "Ankündigung gelöscht",
+                "message": "Sie haben die Ankündigung Nr. {{id}} erfolgreich gelöscht"
+            },
+            "success": {
+                "title": "Ankündigung erstellt",
+                "message": "Ankündigung Nr. {{id}} wurde erstellt"
+            }
+        }
+    },
+    "configuration": {
+        "title": "Konfiguration",
+        "subtitle": "Passen Sie die MDT nach Ihren Wünschen an",
+        "colors": "Farben",
+        "main_color": "Hauptfarbe",
+        "secondary_color": "Sekundärfarbe",
+        "third_color": "Tertiärfarbe",
+        "highlight_color": "Hervorhebungsfarbe",
+        "contrast_color": "Kontrastfarbe",
+        "text_color": "Textfarbe",
+        "language": "Sprache",
+        "reset": "Einstellungen zurücksetzen",
+        "placeholder": "🌎 Sprache",
+        "tooltip": {
+            "language": "Mit dieser Option wird die Sprache nicht für alle Benutzer geändert!"
+        }
+    },
+    "chat": {
+        "placeholder": "Geben Sie eine Nachricht ein..."
+    },
+    "errors": {
+        "no-permission": "Sie haben keine Berechtigung, diese Aktion auszuführen",
+        "incidents": {
+            "name": {
+                "length": "Der Name muss länger als 3 Zeichen sein",
+                "required": "Sie müssen einen Namen eingeben"
+            },
+            "description": {
+                "length": "Die Beschreibung muss länger als 10 Zeichen sein",
+                "required": "Sie müssen eine Beschreibung abgeben"
+            },
+            "players": {
+                "length": "Sie müssen mindestens 1 Bürger auswählen",
+                "required": "Sie müssen einen beteiligten Bürger auswählen"
+            },
+            "cops": {
+                "length": "Sie müssen mindestens 1 Polizist auswählen",
+                "required": "Sie müssen einen beteiligten Polizisten auswählen"
+            }
+        },
+        "evidences": {
+            "name": {
+                "length": "Der Name muss länger als 3 Zeichen sein",
+                "required": "Sie müssen einen Namen eingeben"
+            },
+            "description": {
+                "length": "Die Beschreibung muss länger als 10 Zeichen sein",
+                "required": "Sie müssen eine Beschreibung angeben"
+            },
+            "images": {
+                "length": "Sie müssen mindestens 1 Bild hinzufügen",
+                "max": "Sie können nur 9 Bilder hinzufügen"
+            }
+        },
+        "warrants": {
+            "reason": {
+                "length": "Der Grund muss länger als 5 Zeichen sein",
+                "required": "Sie müssen einen Grund angeben"
+            },
+            "description": {
+                "length": "Die Beschreibung muss länger als 10 Zeichen sein",
+                "required": "Sie müssen eine Beschreibung liefern"
+            },
+            "wtype": {
+                "required": "Sie müssen einen Haftbefehlstyp auswählen"
+            }
+        },
+        "alert": {
+            "title": {
+                "required": "Die Ausschreibung muss einen Titel haben"
+            },
+            "description": {
+                "required": "Sie müssen etwas in die Beschreibung der Ausschreibung schreiben"
+            }
+        },
+        "charges": {
+            "name": {
+                "required": "Sie müssen einen Namen angeben"
+            }
+        },
+        "codes": {
+            "name": {
+                "required": "Sie müssen einen Namen angeben"
+            },
+            "code": {
+                "required": "Sie müssen einen Namen angeben",
+                "format": "Das Codeformat ist falsch"
+            }
+        },
+        "fines": {
+            "name": {
+                "required": "Sie müssen einen Namen angeben"
+            },
+            "code": {
+                "required": "Sie müssen einen Code angeben",
+                "format": "Das Codeformat ist falsch"
+            },
+            "amount": {
+                "required": "Sie müssen einen Betrag festlegen"
+            }
+        }
+    },
+    "list": {
+        "not_found": "Keine Ergebnisse gefunden"
+    },
+    "modal": {
+        "confirm": "Bestätigen",
+        "close": "Schließen"
+    },
+    "common": {
+        "tooltip": {
+            "save": "Klicken Sie auf das Speichersymbol, um die Werte zu speichern",
+            "visit": "Klicken Sie hier, um das Profil des Eigentümers zu besuchen",
+            "waypoint": "Klicken Sie hier, um einen Wegpunkt zu dieser Immobilie zu setzen",
+            "image": "Klicken Sie mit der linken Maustaste, um das Bild zu bearbeiten | Klicken Sie mit der rechten Maustaste, um das Bild zu vergrößern",
+            "clear": "Klicken Sie hier, um Werte zu löschen"
+        },
+        "modal": {
+            "clear_title": "Formular löschen",
+            "clear_message": "Möchten Sie wirklich die Formularwerte löschen?"
+        }
+    },
+    "words": {
+        "error": "Fehler",
+        "search": "Suche",
+        "name": "Name",
+        "description": "Beschreibung",
+        "amount": "Betrag",
+        "months": "Monate",
+        "street": "Straße",
+        "warrants": "Haftbefehle",
+        "information": "Informationen",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "gender": "Geschlecht",
+        "birth": "Datum der Geburt",
+        "phone": "Telefonnummer",
+        "job": "Job",
+        "height": "Größe",
+        "notes": "Anmerkungen",
+        "yes": "Ja",
+        "no": "Nein",
+        "house": "Häuser",
+        "online": "Online",
+        "offline": "Offline",
+        "exit": "Beenden"
+    },
+    "pages": {
+        "dashboard": "Dashboard",
+        "incidents": "Vorfälle",
+        "evidences": "Beweismittel",
+        "warrants": "Haftbefehle",
+        "officers": "Beamte",
+        "alerts": "Meldungen",
+        "citizens": "Bürger",
+        "vehicles": "Fahrzeuge",
+        "houses": "Häuser",
+        "fines": "Geldstrafen",
+        "codes": "Codes",
+        "charges": "Anklagepunkte",
+        "announcements": "Ankündigungen",
+        "bolos": "Haftbefehle",
+        "config": "Konfiguration"
+    }
+}
